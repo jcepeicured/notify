@@ -14,15 +14,3 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-
-
-
-
-
-Route::get('/hey', function () {
-    $pusher = new Pusher\Pusher(env('PUSHER_APP_KEY'), env('PUSHER_APP_SECRET'), env('PUSHER_APP_ID'), array('cluster' => env('PUSHER_APP_CLUSTER')));
-    $pusher->trigger('my-channel', 'my_event', 'hello world');
-});
-
-

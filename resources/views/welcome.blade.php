@@ -62,24 +62,29 @@
                 margin-bottom: 30px;
             }
         </style>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
-<h1>Pusher Test</h1>
-  <p>
-    Publish an event to channel <code>my-channel</code>
-    with event name <code>my-event</code>; it will appear below:
-  </p>
-  <div id="app">
-    <ul>
-      <li v-for="message in messages">
-        @{{message}}
-      </li>
-    </ul>
-  </div>
+     
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Notifications</h1>
+                <div id="app">
+                    <div class="notifications">
+                        <div class="alert alert-success" v-for="message in messages">
+                            @{{ message }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
 
-  <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script>
+
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
     // Enable pusher logging - don't include this in production
     Pusher.logToConsole = true;
 
@@ -88,8 +93,9 @@
     });
 
     var channel = pusher.subscribe('my-channel');
-    channel.bind('my-event', function(data) {
-      app.messages.push(JSON.stringify(data));
+    
+    channel.bind('my_event', function(data) {
+      var z = app.messages.push(JSON.stringify(data));
     });
 
     // Vue application

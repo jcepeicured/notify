@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Http\Controllers\NotificationController;
+use App\Notification;
 use Pusher\Pusher;
 use Illuminate\Console\Command;
 
@@ -38,7 +40,8 @@ class TriggerNotificashion extends Command
      */
     public function handle()
     {
-        $pusher = new Pusher(env('PUSHER_APP_KEY'), env('PUSHER_APP_SECRET'), env('PUSHER_APP_ID'), array('cluster' => env('PUSHER_APP_CLUSTER')));
-        $pusher->trigger('my-channel', 'my_event', 'hello world');
+        $body = "You have new funding!";
+        $notificatoinController = new NotificationController();
+        $notificatoinController->insert($body);
     }
 }
